@@ -23,7 +23,6 @@ import { AddPetModal } from '../../components/Modals/AddPetModal';
 import { AppointmentDetailsModal } from '../../components/Modals/AppointmentDetailsModal';
 import { SupabaseConfigModal } from '../../components/Modals/SupabaseConfigModal';
 import { Appointment } from '../../types';
-import { GALLERY_IMAGES, GALLERY_PREVIEW } from '../../constants/gallery';
 
 interface CustomerHomeProps {
   onNavigateToBook: () => void;

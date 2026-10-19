@@ -555,6 +555,9 @@ const styles = StyleSheet.create({
   /* Grid cards */
   gridWrap: {
     marginTop: 14,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   galleryCard: {
     width: CARD_WIDTH,
