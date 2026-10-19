@@ -45,8 +45,42 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
   const closePreview = () => setPreviewIndex(null);
 
   return (
-    <Screen style={styles.page}>
-      {/* Refreshable scroll */}
+    <Screen
+      scrollable={false}
+      style={styles.page}
+      contentContainerStyle={styles.screenWrapper}
+    >
+      {/* ================= FIXED TOP HEADER BAR WITH CLOSE BUTTON (TOP RIGHT) ================= */}
+      <View style={styles.topAppBar}>
+        <View style={styles.headerLeftCol}>
+          <View style={styles.headerTitleRow}>
+            <AppText variant="h2" style={styles.headerTitle}>
+              Pet Gallery 🐾
+            </AppText>
+            <View style={styles.headerBadge}>
+              <AppText variant="caption" style={styles.headerBadgeText}>
+                {total} captures
+              </AppText>
+            </View>
+          </View>
+          <AppText variant="caption" style={styles.headerSubtitle}>
+            Beautiful moments at Pet&apos;s Hub, Sikar
+          </AppText>
+        </View>
+
+        {onClose && (
+          <TouchableOpacity
+            style={styles.topCloseBtn}
+            onPress={onClose}
+            activeOpacity={0.7}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <Ionicons name="close" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {/* Refreshable scroll with reduced overall page padding */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
@@ -54,39 +88,6 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />
         }
       >
-        {/* ================= HEADER ================= */}
-        <View style={styles.headerWrapper}>
-          <View style={styles.headerBand}>
-            <View style={styles.headerContent}>
-              <View style={styles.headerTopRow}>
-                <View style={styles.headerTitleBadgeRow}>
-                  <AppText variant="h2" style={[styles.headerTitle, { color: Colors.textWhite }]}>
-                    Pet Gallery 🐾✨
-                  </AppText>
-                  <View style={styles.headerBadge}>
-                    <AppText variant="caption" style={styles.headerBadgeText}>
-                      {total} captures
-                    </AppText>
-                  </View>
-                </View>
-                {onClose && (
-                  <TouchableOpacity
-                    style={styles.closeBandBtn}
-                    onPress={onClose}
-                    activeOpacity={0.7}
-                    hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                  >
-                    <Ionicons name="close" size={20} color={Colors.textWhite} />
-                  </TouchableOpacity>
-                )}
-              </View>
-              <AppText variant="bodySmall" style={[styles.headerSubtitle, { color: '#FFE5E8' }]}>
-                Beautiful moments at Pet&apos;s Hub, Sikar
-              </AppText>
-            </View>
-          </View>
-        </View>
-
         {/* ================= 1ST FEATURED IMAGE (FULL WIDTH) ================= */}
         {total > 0 && (
           <TouchableOpacity
@@ -98,16 +99,16 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
             <View style={styles.heroOverlay} />
             <View style={styles.heroContent}>
               <View style={styles.heroChip}>
-                <AppText variant="caption" style={[styles.chipText, { color: Colors.textWhite }]}>
+                <AppText variant="caption" style={styles.chipText}>
                   {CATEGORY_LABELS[GALLERY_IMAGES[0].category as GalleryCategory]}
                 </AppText>
               </View>
-              <AppText variant="h2" style={[styles.heroTitle, { color: Colors.textWhite }]}>
+              <AppText variant="h2" style={styles.heroTitle}>
                 {GALLERY_IMAGES[0].title}
               </AppText>
               <View style={styles.heroFooterRow}>
-                <Ionicons name="image" size={15} color={Colors.textWhite} />
-                <AppText variant="caption" style={[styles.heroMeta, { color: '#F8F9FA' }]}>
+                <Ionicons name="image" size={12} color="#FFFFFF" />
+                <AppText variant="caption" style={styles.heroMeta}>
                   Tap to view full screen
                 </AppText>
               </View>
@@ -123,8 +124,8 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
             >
               <Ionicons
                 name={isFavorited(GALLERY_IMAGES[0].id) ? 'heart' : 'heart-outline'}
-                size={20}
-                color={isFavorited(GALLERY_IMAGES[0].id) ? '#FF4D4D' : Colors.textWhite}
+                size={16}
+                color={isFavorited(GALLERY_IMAGES[0].id) ? '#FF4D4D' : '#FFFFFF'}
               />
             </TouchableOpacity>
           </TouchableOpacity>
@@ -145,16 +146,16 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
                 <View style={styles.cardOverlay} />
                 <View style={styles.cardContent}>
                   <View style={styles.cardChip}>
-                    <AppText variant="caption" style={[styles.chipText, { color: Colors.textWhite }]}>
+                    <AppText variant="caption" style={styles.chipText}>
                       {CATEGORY_LABELS[image.category as GalleryCategory]}
                     </AppText>
                   </View>
-                  <AppText variant="label" style={[styles.cardTitle, { color: Colors.textWhite }]}>
+                  <AppText variant="label" style={styles.cardTitle} numberOfLines={1}>
                     {image.title}
                   </AppText>
                   <View style={styles.cardFooterRow}>
-                    <Ionicons name="paw" size={13} color="#FFE5E8" />
-                    <AppText variant="caption" style={[styles.cardMeta, { color: '#F8F9FA' }]}>
+                    <Ionicons name="paw" size={10} color="#FFE5E8" />
+                    <AppText variant="caption" style={styles.cardMeta} numberOfLines={1}>
                       Pet&apos;s Hub Sikar
                     </AppText>
                   </View>
@@ -170,8 +171,8 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
                 >
                   <Ionicons
                     name={isFavorited(image.id) ? 'heart' : 'heart-outline'}
-                    size={17}
-                    color={isFavorited(image.id) ? '#FF4D4D' : 'rgba(255,255,255,0.9)'}
+                    size={14}
+                    color={isFavorited(image.id) ? '#FF4D4D' : 'rgba(255,255,255,0.95)'}
                   />
                 </TouchableOpacity>
               </TouchableOpacity>
@@ -203,7 +204,7 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
           >
             {/* Close button */}
             <TouchableOpacity style={styles.modalClose} onPress={closePreview} activeOpacity={0.8}>
-              <Ionicons name="close" size={26} color={Colors.textWhite} />
+              <Ionicons name="close" size={22} color={Colors.textWhite} />
             </TouchableOpacity>
 
             {/* Image + navigation */}
@@ -259,7 +260,7 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
                 >
                   <Ionicons
                     name={isFavorited(currentImage?.id ?? '') ? 'heart' : 'heart-outline'}
-                    size={22}
+                    size={20}
                     color={isFavorited(currentImage?.id ?? '') ? '#FF4D4D' : Colors.textSecondary}
                   />
                 </TouchableOpacity>
@@ -286,7 +287,7 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({ onClose }) => {
                 activeOpacity={0.85}
               >
                 <View style={styles.saveIconRow}>
-                  <Ionicons name="bookmark" size={18} color={Colors.textWhite} />
+                  <Ionicons name="bookmark" size={16} color={Colors.textWhite} />
                   <AppText variant="button" style={styles.saveText}>
                     {isFavorited(currentImage?.id ?? '') ? 'Saved to Album 🐾' : 'Add to Favorites'}
                   </AppText>
@@ -304,78 +305,76 @@ const styles = StyleSheet.create({
   /* Page */
   page: {
     backgroundColor: Colors.background,
+    flex: 1,
+  },
+  screenWrapper: {
+    paddingHorizontal: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 4,
+    paddingHorizontal: 8,
+    paddingTop: 8,
     paddingBottom: 24,
-    gap: 0,
-    alignItems: 'stretch',
   },
 
-  /* Header */
-  headerWrapper: {
-    width: '100%',
-  },
-  headerBand: {
+  /* Top App Bar with Close Button (Fixed Top-Right) */
+  topAppBar: {
     backgroundColor: Colors.primary,
-    borderRadius: 20,
-    padding: 18,
-    marginHorizontal: -16,
-    marginTop: 0,
-    marginBottom: 16,
-    shadowColor: '#B91C1C',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
-    shadowRadius: 12,
-    elevation: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.2)',
-  },
-  headerContent: {
-    gap: 8,
-  },
-  headerTopRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    shadowColor: '#B91C1C',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 4,
   },
-  headerTitleBadgeRow: {
+  headerLeftCol: {
+    flex: 1,
+    marginRight: 10,
+  },
+  headerTitleRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 16,
     fontWeight: '800',
-    letterSpacing: 0.4,
+    color: '#FFFFFF',
+    letterSpacing: 0.2,
   },
   headerBadge: {
-    backgroundColor: 'rgba(255,255,255,0.18)',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.35)',
-  },
-  headerBadgeText: {
-    fontSize: 10.5,
-    fontWeight: '700',
-    color: Colors.textWhite,
-    letterSpacing: 0.4,
-  },
-  headerSubtitle: {
-    fontSize: 11,
-    marginTop: 4,
-    lineHeight: 15,
-  },
-  closeBandBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: 'rgba(255,255,255,0.16)',
+    backgroundColor: 'rgba(255,255,255,0.22)',
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.3)',
+  },
+  headerBadgeText: {
+    fontSize: 8.5,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    letterSpacing: 0.2,
+  },
+  headerSubtitle: {
+    fontSize: 9.5,
+    color: '#FFE5E8',
+    marginTop: 2,
+    lineHeight: 13,
+  },
+  topCloseBtn: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.4)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -383,16 +382,17 @@ const styles = StyleSheet.create({
   /* Hero 1st card (full width) */
   heroCard: {
     width: '100%',
-    height: 195,
-    borderRadius: 18,
+    height: 185,
+    borderRadius: 14,
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: Colors.border,
-    marginBottom: 10,
+    marginBottom: 8,
+    backgroundColor: Colors.surfaceMuted,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
     elevation: 3,
   },
   heroImage: {
@@ -400,55 +400,63 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   heroOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.32)',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '52%',
+    backgroundColor: 'rgba(0,0,0,0.48)',
+    borderBottomLeftRadius: 14,
+    borderBottomRightRadius: 14,
   },
   heroContent: {
-    ...StyleSheet.absoluteFillObject,
-    padding: 14,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 10,
     justifyContent: 'flex-end',
-    gap: 4,
+    gap: 2,
   },
   heroChip: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
+    backgroundColor: 'rgba(211,24,38,0.88)',
+    borderRadius: 5,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
     alignSelf: 'flex-start',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
   },
   heroTitle: {
-    fontSize: 18,
+    fontSize: 13.5,
     fontWeight: '800',
-    color: Colors.textWhite,
-    letterSpacing: 0.3,
-    textShadowColor: '#000',
+    color: '#FFFFFF',
+    letterSpacing: 0.2,
+    textShadowColor: 'rgba(0,0,0,0.6)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
   },
   heroFooterRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    marginTop: 2,
+    gap: 4,
+    marginTop: 1,
   },
   heroMeta: {
-    fontSize: 10.5,
+    fontSize: 8.5,
     fontWeight: '600',
+    color: '#FFFFFF',
   },
   heroFavorite: {
     position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: 'rgba(0,0,0,0.55)',
-    borderRadius: 15,
-    width: 30,
-    height: 30,
+    top: 8,
+    right: 8,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderRadius: 14,
+    width: 28,
+    height: 28,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.35)',
+    borderColor: 'rgba(255,255,255,0.4)',
   },
 
   /* Grid cards */
@@ -458,77 +466,87 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   galleryCard: {
-    width: '48.5%',
+    width: '48.8%',
     height: 155,
-    borderRadius: 16,
+    borderRadius: 12,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: 'rgba(0,0,0,0.06)',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
-    shadowRadius: 5,
+    shadowRadius: 3,
     elevation: 2,
-    marginBottom: 10,
+    marginBottom: 8,
+    backgroundColor: Colors.surfaceMuted,
   },
   galleryImage: {
     width: '100%',
     height: '100%',
   },
   cardOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '52%',
+    backgroundColor: 'rgba(0,0,0,0.48)',
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
   },
   cardContent: {
-    ...StyleSheet.absoluteFillObject,
-    padding: 12,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 7,
     justifyContent: 'flex-end',
-    gap: 4,
+    gap: 2,
   },
   cardChip: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 8,
-    paddingHorizontal: 7,
-    paddingVertical: 3,
+    backgroundColor: 'rgba(211,24,38,0.85)',
+    borderRadius: 4,
+    paddingHorizontal: 5,
+    paddingVertical: 1.5,
     alignSelf: 'flex-start',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
   },
   chipText: {
-    fontSize: 9,
+    fontSize: 7.2,
     fontWeight: '800',
-    letterSpacing: 0.4,
+    letterSpacing: 0.2,
+    color: '#FFFFFF',
   },
   cardTitle: {
-    fontSize: 14,
+    fontSize: 10.5,
     fontWeight: '800',
-    color: Colors.textWhite,
-    textShadowColor: '#000',
+    color: '#FFFFFF',
+    textShadowColor: 'rgba(0,0,0,0.6)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
+    lineHeight: 14,
   },
   cardFooterRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
+    gap: 3,
   },
   cardMeta: {
-    fontSize: 10,
+    fontSize: 7.5,
     fontWeight: '600',
-    color: '#E5E7EB',
+    color: 'rgba(255,255,255,0.88)',
   },
   cardFavorite: {
     position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: 'rgba(0,0,0,0.55)',
-    borderRadius: 14,
-    width: 28,
-    height: 28,
+    top: 6,
+    right: 6,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderRadius: 13,
+    width: 26,
+    height: 26,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.35)',
+    borderColor: 'rgba(255,255,255,0.4)',
   },
   bottomSpacer: { height: 24 },
 
@@ -551,22 +569,22 @@ const styles = StyleSheet.create({
   },
   modalClose: {
     position: 'absolute',
-    top: -14,
-    right: -14,
+    top: -16,
+    right: -16,
     zIndex: 20,
-    backgroundColor: Colors.primary,
-    borderRadius: 26,
-    width: 52,
-    height: 52,
+    backgroundColor: '#EF4444',
+    borderRadius: 24,
+    width: 48,
+    height: 48,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.6,
-    shadowRadius: 8,
-    elevation: 10,
+    shadowOpacity: 0.5,
+    shadowRadius: 6,
+    elevation: 8,
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: '#FFFFFF',
   },
   previewWrapper: {
     alignItems: 'center',
@@ -595,11 +613,11 @@ const styles = StyleSheet.create({
     zIndex: 15,
   },
   previewImage: {
-    maxWidth: '82%',
-    maxHeight: '66%',
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.12)',
+    maxWidth: '88%',
+    maxHeight: '68%',
+    borderRadius: 20,
+    borderWidth: 3,
+    borderColor: 'rgba(255,255,255,0.16)',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.5,
@@ -611,10 +629,10 @@ const styles = StyleSheet.create({
   infoSheet: {
     width: '100%',
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    paddingHorizontal: 18,
-    paddingVertical: 16,
-    gap: 12,
+    borderRadius: 18,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    gap: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
@@ -631,15 +649,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   infoCategoryLabel: {
-    fontSize: 11,
+    fontSize: 9.5,
     fontWeight: '800',
     color: Colors.primary,
     textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    marginBottom: 4,
+    letterSpacing: 0.5,
+    marginBottom: 2,
   },
   infoTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '800',
     color: Colors.textPrimary,
     letterSpacing: 0.2,
@@ -648,9 +666,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.surfaceMuted,
     borderWidth: 1,
     borderColor: Colors.border,
-    borderRadius: 14,
-    width: 42,
-    height: 42,
+    borderRadius: 12,
+    width: 38,
+    height: 38,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -668,12 +686,12 @@ const styles = StyleSheet.create({
     width: 7,
     height: 7,
     borderRadius: 3.5,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: 'rgba(255,255,255,0.35)',
   },
   pageDotActive: {
-    width: 22,
+    width: 24,
     height: 7,
-    backgroundColor: Colors.primary,
+    backgroundColor: '#EF4444',
     borderRadius: 3.5,
   },
   saveBtn: {
@@ -681,11 +699,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: Colors.primary,
+    backgroundColor: '#EF4444',
     borderWidth: 1,
-    borderColor: Colors.primaryHover,
-    borderRadius: 16,
-    paddingVertical: 13,
+    borderColor: '#B91C1C',
+    borderRadius: 14,
+    paddingVertical: 11,
     shadowColor: '#B91C1C',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.35,
@@ -698,7 +716,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   saveText: {
-    fontSize: 14,
+    fontSize: 12.5,
     fontWeight: '800',
     color: Colors.textWhite,
     letterSpacing: 0.3,
