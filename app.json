@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Pet's Hub",
+    "slug": "petshub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#D32F2F"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.petshub.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#D32F2F"
+      },
+      "package": "com.petshub.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/DMSans_400Regular.ttf",
+            "./assets/fonts/DMSans_400Regular_Italic.ttf",
+            "./assets/fonts/DMSans_500Medium.ttf",
+            "./assets/fonts/DMSans_500Medium_Italic.ttf",
+            "./assets/fonts/DMSans_600SemiBold.ttf",
+            "./assets/fonts/DMSans_600SemiBold_Italic.ttf",
+            "./assets/fonts/DMSans_700Bold.ttf",
+            "./assets/fonts/DMSans_700Bold_Italic.ttf",
+            "./assets/fonts/DMSans_800ExtraBold.ttf",
+            "./assets/fonts/DMSans_900Black.ttf"
+          ]
+        }
+      ]
+    ],
+    "assetBundlePatterns": ["**/*"]
+  }
+}

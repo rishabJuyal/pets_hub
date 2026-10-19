@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Outer White Ring / Circle Badge -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M60,6 A54,54 0 1,0 60,114 A54,54 0 1,0 60,6 Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M60,12 A48,48 0 1,0 60,108 A48,48 0 1,0 60,12 Z" />
+
+    <!-- Inner Red Emblem Surface -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M60,16 A44,44 0 1,0 60,104 A44,44 0 1,0 60,16 Z" />
+
+    <!-- White Paw Print Elements -->
+    <!-- Toe 1 (Far Left) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,48 A5.5,7 340 1,1 36.5,35 A5.5,7 340 1,1 40,48 Z" />
+
+    <!-- Toe 2 (Center Left) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,40 A6,7.5 355 1,1 50.5,25.5 A6,7.5 355 1,1 52,40 Z" />
+
+    <!-- Toe 3 (Center Right) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M69.5,40 A6,7.5 5 1,1 68,25.5 A6,7.5 5 1,1 69.5,40 Z" />
+
+    <!-- Toe 4 (Far Right) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M83.5,48 A5.5,7 20 1,1 80,35 A5.5,7 20 1,1 83.5,48 Z" />
+
+    <!-- Main Paw Pad -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,86 C47,86 38,76 38,67 C38,58 48,54 60,60 C72,54 82,58 82,67 C82,76 73,86 60,86 Z" />
+
+    <!-- Red Veterinary Clinic Cross inside main paw pad -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M57,63 L63,63 L63,67 L68,67 L68,73 L63,73 L63,78 L57,78 L57,73 L52,73 L52,67 L57,67 Z" />
+
+    <!-- White Heart accent below cross -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,94 C57,91 52,87 52,84 C52,82 54,81 55.5,81 C57,81 59,82 60,83.5 C61,82 63,81 64.5,81 C66,81 68,82 68,84 C68,87 63,91 60,94 Z" />
+
+</vector>

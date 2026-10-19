@@ -1,0 +1,6 @@
+{
+  "name": "Pet's Hub",
+  "description": "Pet care business management app with role-based Admin and Customer dashboards, appointment scheduling, and product management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
