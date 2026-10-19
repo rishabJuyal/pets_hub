@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Linking,
+  Modal,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../theme/colors';
@@ -23,13 +24,15 @@ import { AddPetModal } from '../../components/Modals/AddPetModal';
 import { AppointmentDetailsModal } from '../../components/Modals/AppointmentDetailsModal';
 import { SupabaseConfigModal } from '../../components/Modals/SupabaseConfigModal';
 import { Appointment } from '../../types';
+import { GALLERY_PREVIEW } from '../../constants/gallery';
+import { GalleryScreen } from './GalleryScreen';
 
 interface CustomerHomeProps {
   onNavigateToBook: () => void;
   onNavigateToAppointments: () => void;
   onNavigateToShop: () => void;
   onNavigateToAlerts: () => void;
-  onNavigateToGallery: () => void;
+  onNavigateToGallery?: () => void;
 }
 
 export const CustomerHome: React.FC<CustomerHomeProps> = ({
@@ -51,6 +54,7 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
 
   const [showAddPetModal, setShowAddPetModal] = useState(false);
   const [showSupabaseModal, setShowSupabaseModal] = useState(false);
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
   const [selectedApt, setSelectedApt] = useState<Appointment | null>(null);
 
   const nextUpcoming = customerAppointments.find(
@@ -59,6 +63,10 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
 
   const onRateUsPress = () => {
     Linking.openURL(CLINIC_INFO.mapsUrl);
+  };
+
+  const handleOpenGallery = () => {
+    setShowGalleryModal(true);
   };
 
   return (
@@ -228,6 +236,50 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
       </View>
 
       <SectionHeader
+        title="Pet Gallery 🐾✨"
+        subtitle="Cute moments from Pet&apos;s Hub, Sikar"
+        actionTitle="View All Moments"
+        onActionPress={handleOpenGallery}
+      />
+
+      <View style={styles.gallerySectionWrapper}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.galleryPreviewContent}
+        >
+          {GALLERY_PREVIEW.map((image) => (
+            <TouchableOpacity
+              key={image.id}
+              style={styles.galleryPreviewCard}
+              onPress={handleOpenGallery}
+              activeOpacity={0.88}
+            >
+              <Image source={image.uri} style={styles.galleryPreviewImage} resizeMode="cover" />
+              <View style={styles.galleryPreviewOverlay} />
+              <View style={styles.galleryPreviewBadge}>
+                <AppText variant="caption" style={styles.galleryPreviewBadgeText}>
+                  🐾
+                </AppText>
+              </View>
+            </TouchableOpacity>
+          ))}
+          <TouchableOpacity
+            style={styles.viewAllCard}
+            onPress={handleOpenGallery}
+            activeOpacity={0.8}
+          >
+            <View style={styles.viewAllContent}>
+              <Ionicons name="image" size={20} color={Colors.primary} />
+              <AppText variant="caption" style={styles.viewAllText}>
+                View All Moments →
+              </AppText>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
+      <SectionHeader
         title="Love Pet's Hub?"
         subtitle="Rate us on Google Maps"
         actionTitle="Leave a Review"
@@ -270,50 +322,6 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         />
       </Card>
 
-      <SectionHeader
-        title="Pet Gallery 🐾✨"
-        subtitle="Cute moments from Pet&apos;s Hub, Sikar"
-        actionTitle="View All Moments"
-        onActionPress={onNavigateToGallery}
-      />
-
-      <View style={styles.gallerySectionWrapper}>
-        <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.galleryPreviewContent}
-      >
-        {GALLERY_PREVIEW.map((image) => (
-          <TouchableOpacity
-            key={image.id}
-            style={styles.galleryPreviewCard}
-            onPress={onNavigateToGallery}
-            activeOpacity={0.88}
-          >
-            <Image source={image.uri} style={styles.galleryPreviewImage} resizeMode="cover" />
-            <View style={styles.galleryPreviewOverlay} />
-            <View style={styles.galleryPreviewBadge}>
-              <AppText variant="caption" style={styles.galleryPreviewBadgeText}>
-                🐾
-              </AppText>
-            </View>
-          </TouchableOpacity>
-        ))}
-        <TouchableOpacity
-          style={styles.viewAllCard}
-          onPress={onNavigateToGallery}
-          activeOpacity={0.8}
-        >
-          <View style={styles.viewAllContent}>
-            <Ionicons name="image" size={20} color={Colors.primary} />
-            <AppText variant="caption" style={styles.viewAllText}>
-              View All Moments →
-            </AppText>
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
-      </View>
-
       <AddPetModal
         visible={showAddPetModal}
         onClose={() => setShowAddPetModal(false)}
@@ -335,6 +343,15 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         onClose={() => setShowSupabaseModal(false)}
         onSave={updateSupabaseConfig}
       />
+
+      <Modal
+        visible={showGalleryModal}
+        animationType="slide"
+        presentationStyle="fullScreen"
+        onRequestClose={() => setShowGalleryModal(false)}
+      >
+        <GalleryScreen onClose={() => setShowGalleryModal(false)} />
+      </Modal>
     </Screen>
   );
 };

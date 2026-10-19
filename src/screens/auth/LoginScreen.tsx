@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Image,
@@ -9,19 +9,19 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '../../theme/colors';
-import { Typography } from '../../theme/typography';
-import { usePetsHub } from '../../context/PetsHubContext';
-import { Screen } from '../../components/Screen';
-import { Card } from '../../components/Card';
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import { AppText } from '../../components/AppText';
-import { SupabaseConfigModal } from '../../components/Modals/SupabaseConfigModal';
+import {Ionicons} from '@expo/vector-icons';
+import {Colors} from '../../theme/colors';
+import {Typography} from '../../theme/typography';
+import {usePetsHub} from '../../context/PetsHubContext';
+import {Screen} from '../../components/Screen';
+import {Card} from '../../components/Card';
+import {Button} from '../../components/Button';
+import {Input} from '../../components/Input';
+import {AppText} from '../../components/AppText';
+import {SupabaseConfigModal} from '../../components/Modals/SupabaseConfigModal';
 
 export const LoginScreen: React.FC = () => {
-  const { login, register, loginDemo, supabaseConfig, updateSupabaseConfig } =
+  const {login, register, loginDemo, supabaseConfig, updateSupabaseConfig} =
     usePetsHub();
 
   const [isRegisterMode, setIsRegisterMode] = useState(false);
@@ -76,17 +76,17 @@ export const LoginScreen: React.FC = () => {
 
         <View style={styles.locationRatingPill}>
           <Ionicons name="location" size={13} color={Colors.primary} />
-          <AppText variant="caption" style={[styles.locationText, { color: Colors.primary }]}>
+          <AppText variant="caption" style={[styles.locationText, {color: Colors.primary}]}>
             Sikar, Rajasthan
           </AppText>
           <Ionicons name="star" size={13} color="#F59E0B" style={styles.starIcon} />
-          <AppText variant="caption" style={[styles.ratingText, { color: Colors.primary }]}>
+          <AppText variant="caption" style={[styles.ratingText, {color: Colors.primary}]}>
             4.9★
           </AppText>
         </View>
 
         <View style={styles.demoCard}>
-          <AppText variant="caption" style={[styles.demoCardTitle, { color: Colors.primary }]}>
+          <AppText variant="caption" style={[styles.demoCardTitle, {color: Colors.primary}]}>
             Quick Demo Access (One-Tap)
           </AppText>
           <View style={styles.demoButtonsRow}>
@@ -96,7 +96,7 @@ export const LoginScreen: React.FC = () => {
               activeOpacity={0.8}
             >
               <Ionicons name="shield-checkmark" size={16} color="#FFFFFF" />
-              <AppText variant="caption" style={[styles.demoAdminText, { color: '#FFFFFF' }]}>
+              <AppText variant="caption" style={[styles.demoAdminText, {color: '#FFFFFF'}]}>
                 Admin Demo
               </AppText>
             </TouchableOpacity>
@@ -107,7 +107,7 @@ export const LoginScreen: React.FC = () => {
               activeOpacity={0.8}
             >
               <Ionicons name="paw" size={16} color={Colors.primary} />
-              <AppText variant="caption" style={[styles.demoCustomerText, { color: Colors.primary }]}>
+              <AppText variant="caption" style={[styles.demoCustomerText, {color: Colors.primary}]}>
                 Customer Demo
               </AppText>
             </TouchableOpacity>
@@ -115,10 +115,10 @@ export const LoginScreen: React.FC = () => {
         </View>
 
         <Card padding={20} shadow="sm" style={styles.formCard}>
-          <AppText variant="h2" style={[styles.formTitle, { color: Colors.textPrimary }]}>
+          <AppText variant="h2" style={[styles.formTitle, {color: Colors.textPrimary}]}>
             {isRegisterMode ? 'Create Account' : 'Sign In'}
           </AppText>
-          <AppText variant="bodySmall" style={[styles.formSubtitle, { color: Colors.textSecondary }]}>
+          <AppText variant="bodySmall" style={[styles.formSubtitle, {color: Colors.textSecondary}]}>
             {isRegisterMode
               ? 'Register for clinic visits and supplies'
               : "Access your pets' health history & bookings"}
@@ -126,7 +126,7 @@ export const LoginScreen: React.FC = () => {
 
           {authError ? (
             <View style={styles.errorBox}>
-              <AppText variant="caption" style={[styles.errorText, { color: Colors.danger }]}>
+              <AppText variant="caption" style={[styles.errorText, {color: Colors.danger}]}>
                 {authError}
               </AppText>
             </View>
@@ -193,18 +193,18 @@ export const LoginScreen: React.FC = () => {
           />
 
           <View style={styles.toggleRow}>
-            <AppText variant="caption" style={[styles.toggleNormal, { color: Colors.textSecondary }]}>
+            <AppText variant="caption" style={[styles.toggleNormal, {color: Colors.textSecondary}]}>
               {isRegisterMode ? 'Already have an account? ' : "Don't have an account? "}
             </AppText>
             <TouchableOpacity onPress={() => setIsRegisterMode(!isRegisterMode)}>
-              <AppText variant="caption" style={[styles.toggleBold, { color: Colors.primary }]}>
+              <AppText variant="caption" style={[styles.toggleBold, {color: Colors.primary}]}>
                 {isRegisterMode ? 'Sign In' : 'Sign Up'}
               </AppText>
             </TouchableOpacity>
           </View>
         </Card>
 
-        <Button
+        {/* <Button
           title={
             supabaseConfig.isLiveEnabled
               ? 'Supabase Live Connected'
@@ -214,7 +214,7 @@ export const LoginScreen: React.FC = () => {
           onPress={() => setShowSupabaseDialog(true)}
           fullWidth
           style={styles.supabaseBtn}
-        />
+        /> */}
       </ScrollView>
 
       <SupabaseConfigModal
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.15,
     shadowRadius: 4,
     elevation: 4,
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     padding: 14,
     marginTop: 20,
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.04,
     shadowRadius: 3,
     elevation: 1,

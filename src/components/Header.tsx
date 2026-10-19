@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '../theme/colors';
-import { usePetsHub } from '../context/PetsHubContext';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
+import {Colors} from '../theme/colors';
+import {usePetsHub} from '../context/PetsHubContext';
 
 interface HeaderProps {
   onOpenNotifications?: () => void;
@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenNotifications,
   onOpenSupabaseConfig,
 }) => {
-  const { currentUser, logout, unreadNotificationCount, supabaseConfig } =
+  const {currentUser, logout, unreadNotificationCount, supabaseConfig} =
     usePetsHub();
 
   const isAdmin = currentUser?.role === 'ADMIN';
@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
       </View>
 
       <View style={styles.actionsRow}>
-        {onOpenSupabaseConfig && (
+        {/* {onOpenSupabaseConfig && (
           <TouchableOpacity
             style={styles.actionIconBtn}
             onPress={onOpenSupabaseConfig}
@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
               ]}
             />
           </TouchableOpacity>
-        )}
+        )} */}
 
         <TouchableOpacity
           style={styles.actionIconBtn}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 3,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.08,
     shadowRadius: 1,
     elevation: 1,
