@@ -11,7 +11,6 @@ import { MyAppointments } from '../screens/customer/MyAppointments';
 import { CustomerShop } from '../screens/customer/CustomerShop';
 import { CustomerNotifications } from '../screens/customer/CustomerNotifications';
 import { CustomerProfile } from '../screens/customer/CustomerProfile';
-import { GalleryScreen } from '../screens/customer/GalleryScreen';
 
 const Tab = createBottomTabNavigator();
 
