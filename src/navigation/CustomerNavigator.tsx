@@ -96,22 +96,6 @@ export const CustomerNavigator: React.FC = () => {
         </Tab.Screen>
 
         <Tab.Screen
-          name="Gallery"
-          options={{
-            tabBarLabel: renderTabLabel('Gallery'),
-            tabBarIcon: ({ focused, color }) => (
-              <Ionicons
-                name={focused ? 'images' : 'images-outline'}
-                size={20}
-                color={color}
-              />
-            ),
-          }}
-        >
-          {() => <GalleryScreen />}
-        </Tab.Screen>
-
-        <Tab.Screen
           name="Book"
           options={{
             tabBarLabel: renderTabLabel('Book'),
